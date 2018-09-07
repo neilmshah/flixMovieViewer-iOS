@@ -12,6 +12,7 @@ import AlamofireImage
 class MovieViewController: UIViewController, UITableViewDataSource {
 
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     
     var movies: [[String: Any]] = []
@@ -26,7 +27,7 @@ class MovieViewController: UIViewController, UITableViewDataSource {
         
         tableView.dataSource = self
         tableView.rowHeight = 150
-
+        
         fetchMovies()
         
     }
@@ -36,6 +37,7 @@ class MovieViewController: UIViewController, UITableViewDataSource {
     }
     
     func fetchMovies() {
+        self.activityIndicator.startAnimating()
         //Network Request
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
@@ -44,6 +46,14 @@ class MovieViewController: UIViewController, UITableViewDataSource {
             //This will run when the network request returns
             if let error = error {
                 print(error.localizedDescription)
+                self.activityIndicator.stopAnimating()
+                self.refreshControl.endRefreshing()
+                let alertController = UIAlertController(title: "Error", message: "Network/Connectivity not available", preferredStyle: .alert)
+                let cancelAction = UIAlertAction(title: "Dismiss", style: .cancel) { (action) in
+                }
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true) {
+                }
             } else if let data = data {
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
                 //Get the array of movies
@@ -58,6 +68,8 @@ class MovieViewController: UIViewController, UITableViewDataSource {
             }
         }
         task.resume()
+        self.activityIndicator.stopAnimating()
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
