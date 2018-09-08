@@ -9,14 +9,16 @@
 import UIKit
 import AlamofireImage
 
-class MovieViewController: UIViewController, UITableViewDataSource {
+class MovieViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var tableView: UITableView!
     
     var movies: [[String: Any]] = []
     var refreshControl: UIRefreshControl!
+    var allMovies: [[String: Any]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +28,12 @@ class MovieViewController: UIViewController, UITableViewDataSource {
         tableView.insertSubview(refreshControl, at: 0 )
         
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.rowHeight = 150
         
+        searchBar.delegate = self
+        
+        self.activityIndicator.startAnimating()
         fetchMovies()
         
     }
@@ -37,7 +43,7 @@ class MovieViewController: UIViewController, UITableViewDataSource {
     }
     
     func fetchMovies() {
-        self.activityIndicator.startAnimating()
+        
         //Network Request
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
@@ -48,7 +54,7 @@ class MovieViewController: UIViewController, UITableViewDataSource {
                 print(error.localizedDescription)
                 self.activityIndicator.stopAnimating()
                 self.refreshControl.endRefreshing()
-                let alertController = UIAlertController(title: "Error", message: "Network/Connectivity not available", preferredStyle: .alert)
+                let alertController = UIAlertController(title: "Cannot get Movies", message: "There seems to be an issue with the internet connection", preferredStyle: .alert)
                 let cancelAction = UIAlertAction(title: "Dismiss", style: .cancel) { (action) in
                 }
                 alertController.addAction(cancelAction)
@@ -60,26 +66,34 @@ class MovieViewController: UIViewController, UITableViewDataSource {
                 let movies = dataDictionary["results"] as! [[String: Any]]
                 // Store the movies in a property to use elsewhere
                 self.movies = movies
+                self.allMovies = movies
                 //Reload your table view data
                 self.tableView.reloadData()
                 
+                //DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                //    self.activityIndicator.isHidden = true
+                //}
+
+                self.activityIndicator.stopAnimating()
+
                 //End refreshing
                 self.refreshControl.endRefreshing()
             }
         }
         task.resume()
-        self.activityIndicator.stopAnimating()
-
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return movies.count
+        //return filteredMovies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
         
         let movie = movies[indexPath.row]
+        //let movie = filteredMovies[indexPath.row]
         let title = movie["title"] as! String
         let overview = movie["overview"] as! String
         
@@ -95,6 +109,29 @@ class MovieViewController: UIViewController, UITableViewDataSource {
         
         
         return cell
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        movies = searchText.isEmpty ? movies : allMovies.filter { (item: [String: Any]) -> Bool in
+            
+            let i = item["title"] as! String
+            return i.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        
+        tableView.reloadData()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        //fetchMovies()
+        movies = self.allMovies
+        tableView.reloadData()
+        searchBar.resignFirstResponder()
     }
     
     override func didReceiveMemoryWarning() {
