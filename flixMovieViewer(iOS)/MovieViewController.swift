@@ -104,9 +104,16 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
         let posterPathString = movie["poster_path"] as! String
         let baseURLString = "https://image.tmdb.org/t/p/w500"
         let posterURL = URL(string: baseURLString + posterPathString)!
-        cell.posterImageView.af_setImage(withURL: posterURL)
         
+        let placeholderImage = UIImage(named: "placeholder")!
+        let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
+            size: cell.posterImageView.frame.size,
+            radius: 20.0
+        )
         
+        cell.posterImageView.af_setImage(withURL: posterURL, placeholderImage: placeholderImage, filter: filter, imageTransition: .crossDissolve(0.2))
+        
+        cell.selectionStyle = .none
         
         return cell
     }
