@@ -43,7 +43,6 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func fetchMovies() {
-        
         //Network Request
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
@@ -69,10 +68,6 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
                 self.allMovies = movies
                 //Reload your table view data
                 self.tableView.reloadData()
-                
-                //DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                //    self.activityIndicator.isHidden = true
-                //}
 
                 self.activityIndicator.stopAnimating()
 
@@ -81,7 +76,6 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
         }
         task.resume()
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -108,14 +102,25 @@ class MovieViewController: UIViewController, UITableViewDataSource, UITableViewD
         let placeholderImage = UIImage(named: "placeholder")!
         let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
             size: cell.posterImageView.frame.size,
-            radius: 20.0
+            radius: 5.0
         )
         
         cell.posterImageView.af_setImage(withURL: posterURL, placeholderImage: placeholderImage, filter: filter, imageTransition: .crossDissolve(0.2))
         
-        cell.selectionStyle = .none
+        //cell.selectionStyle = .gray
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.darkGray
+        cell.selectedBackgroundView = backgroundView
         
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UITableViewCell
+        let indexPath = tableView.indexPath(for: cell)
+        let movie = movies[(indexPath?.row)!]
+        let detailViewControler = segue.destination as! DetailViewController
+        detailViewControler.movie = movie
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
