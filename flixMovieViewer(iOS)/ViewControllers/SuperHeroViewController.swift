@@ -84,5 +84,13 @@ class SuperHeroViewController: UIViewController, UICollectionViewDataSource {
         }
         task.resume()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let cell = sender as! UICollectionViewCell
+        let indexPath = collectionView.indexPath(for: cell)
+        let movie = movies[(indexPath?.item)!]
+        let superHeroDetailViewController = segue.destination as! SuperHeroDetailViewController
+        superHeroDetailViewController.movie = movie
+    }
 
 }
