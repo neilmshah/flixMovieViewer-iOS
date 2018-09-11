@@ -12,21 +12,26 @@ class SuperHeroViewController: UIViewController, UICollectionViewDataSource {
 
     @IBOutlet weak var collectionView: UICollectionView!
     var movies: [[String: Any]] = []
+    var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
         
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(SuperHeroViewController.didPullToRefresh(_:)), for: .valueChanged)
+        collectionView.insertSubview(refreshControl, at: 0 )
+        
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         let cellsPerLine: CGFloat = 2
         let interItemSpacingTotal =  layout.minimumInteritemSpacing * (cellsPerLine - 1)
-        var width = collectionView.frame.size.width / cellsPerLine - interItemSpacingTotal / cellsPerLine
+        let width = collectionView.frame.size.width / cellsPerLine - interItemSpacingTotal / cellsPerLine
         layout.itemSize = CGSize(width: width, height: width * 3/2)
         
-        
-        
-        
-        
+        fetchMovies()
+    }
+    
+    @objc func didPullToRefresh(_ refreshControl: UIRefreshControl){
         fetchMovies()
     }
 
@@ -79,7 +84,7 @@ class SuperHeroViewController: UIViewController, UICollectionViewDataSource {
                 self.collectionView.reloadData()
                 
                 //self.activityIndicator.stopAnimating()
-                //self.refreshControl.endRefreshing()
+                self.refreshControl.endRefreshing()
             }
         }
         task.resume()
