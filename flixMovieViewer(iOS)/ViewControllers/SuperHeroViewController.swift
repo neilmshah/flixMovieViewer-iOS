@@ -8,15 +8,18 @@
 
 import UIKit
 
-class SuperHeroViewController: UIViewController, UICollectionViewDataSource {
+class SuperHeroViewController: UIViewController, UICollectionViewDataSource, UISearchBarDelegate {
 
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     var movies: [[String: Any]] = []
     var refreshControl: UIRefreshControl!
+    var allMovies: [[String: Any]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
+        searchBar.delegate = self
         
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(SuperHeroViewController.didPullToRefresh(_:)), for: .valueChanged)
@@ -79,7 +82,7 @@ class SuperHeroViewController: UIViewController, UICollectionViewDataSource {
                 //Get the array of movies
                 let movies = dataDictionary["results"] as! [[String: Any]]
                 self.movies = movies
-                //self.allMovies = movies
+                self.allMovies = movies
                 
                 self.collectionView.reloadData()
                 
@@ -96,6 +99,28 @@ class SuperHeroViewController: UIViewController, UICollectionViewDataSource {
         let movie = movies[(indexPath?.item)!]
         let superHeroDetailViewController = segue.destination as! SuperHeroDetailViewController
         superHeroDetailViewController.movie = movie
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        movies = searchText.isEmpty ? movies : allMovies.filter { (item: [String: Any]) -> Bool in
+            
+            let i = item["title"] as! String
+            return i.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        
+        collectionView.reloadData()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        movies = self.allMovies
+        collectionView.reloadData()
+        searchBar.resignFirstResponder()
     }
 
 }
