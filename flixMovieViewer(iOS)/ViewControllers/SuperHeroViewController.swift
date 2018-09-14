@@ -19,6 +19,7 @@ class SuperHeroViewController: UIViewController, UICollectionViewDataSource, UIS
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
+        
         searchBar.delegate = self
         
         refreshControl = UIRefreshControl()
@@ -40,7 +41,6 @@ class SuperHeroViewController: UIViewController, UICollectionViewDataSource, UIS
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -97,8 +97,10 @@ class SuperHeroViewController: UIViewController, UICollectionViewDataSource, UIS
         let cell = sender as! UICollectionViewCell
         let indexPath = collectionView.indexPath(for: cell)
         let movie = movies[(indexPath?.item)!]
-        let superHeroDetailViewController = segue.destination as! SuperHeroDetailViewController
-        superHeroDetailViewController.movie = movie
+        let detailViewControler = segue.destination as! DetailViewController
+        detailViewControler.movie = movie
+        //let superHeroDetailViewController = segue.destination as! SuperHeroDetailViewController
+        //superHeroDetailViewController.movie = movie
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

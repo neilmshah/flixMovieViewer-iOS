@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Movies-->
+        <!--Now Playing Movies-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MovieViewController" customModule="flixMovieViewer_iOS_" customModuleProvider="target" sceneMemberID="viewController">
@@ -76,7 +76,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Movies" id="PnT-l4-3tf"/>
+                    <navigationItem key="navigationItem" title="Now Playing Movies" id="PnT-l4-3tf"/>
                     <connections>
                         <outlet property="activityIndicator" destination="2BX-HO-Bjo" id="iq2-ps-uMV"/>
                         <outlet property="searchBar" destination="oao-Fw-JC6" id="yxJ-os-ved"/>
@@ -138,7 +138,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b4e-0L-7FM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1808.5" y="148.5"/>
+            <point key="canvasLocation" x="1954" y="574"/>
         </scene>
         <!--Now Playing-->
         <scene sceneID="DZB-UL-29o">
@@ -217,7 +217,7 @@
                                         </view>
                                         <connections>
                                             <outlet property="posterImageView" destination="a2l-dV-OAq" id="N9X-1V-geM"/>
-                                            <segue destination="DaB-fr-a9w" kind="push" id="Mgu-zK-xAy"/>
+                                            <segue destination="A5R-8x-tJ1" kind="push" id="FCB-vK-XPr"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -240,59 +240,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8Yo-s7-zu8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1259.5" y="994.5"/>
-        </scene>
-        <!--Super Hero Detail View Controller-->
-        <scene sceneID="qUE-gO-c7T">
-            <objects>
-                <viewController id="DaB-fr-a9w" customClass="SuperHeroDetailViewController" customModule="flixMovieViewer_iOS_" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="bDS-pO-iaI">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="lR7-iS-Y7K">
-                                <rect key="frame" x="0.0" y="64" width="375" height="271"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" id="9uY-Ah-36f">
-                                <rect key="frame" x="16" y="255" width="105" height="157"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="rxj-mB-sBb">
-                                <rect key="frame" x="129" y="343" width="230" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Release Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7dm-FP-NJv">
-                                <rect key="frame" x="129" y="390" width="230" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
-                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Overview" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nod-HK-MBR">
-                                <rect key="frame" x="16" y="433" width="343" height="185"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="14"/>
-                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="tST-XR-Qff"/>
-                    <connections>
-                        <outlet property="backDropImageView" destination="lR7-iS-Y7K" id="aY5-ZL-tJj"/>
-                        <outlet property="overviewLabel" destination="nod-HK-MBR" id="s0h-0u-Nqn"/>
-                        <outlet property="posterImageView" destination="9uY-Ah-36f" id="I0o-Vr-pcz"/>
-                        <outlet property="releaseDateLabel" destination="7dm-FP-NJv" id="BNK-2p-ozZ"/>
-                        <outlet property="titleLabel" destination="rxj-mB-sBb" id="yiH-Vu-zS6"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8zx-Ho-bZk" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1808.5" y="994.5"/>
         </scene>
         <!--SuperHero-->
         <scene sceneID="v74-g8-HRg">
@@ -318,4 +265,7 @@
         <image name="now_playing_tabbar_item" width="21" height="21"/>
         <image name="superhero_tabbar_item" width="21" height="23"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="y6W-vx-cfT"/>
+    </inferredMetricsTieBreakers>
 </document>
