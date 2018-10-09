@@ -18,32 +18,46 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var releaseDateLabelView: UILabel!
     @IBOutlet weak var overViewLabelView: UILabel!
     
-    var movie: [String: Any]?
+    var movie: Movie!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let movie = movie {
-            titleLabelView.text = movie["title"] as? String
-            releaseDateLabelView.text = movie["release_date"] as? String
-            overViewLabelView.text = movie["overview"] as? String
-            
-            let baseURLString = "https://image.tmdb.org/t/p/w500"
-            let posterPathString = movie["poster_path"] as? String
-            let backDropPathString = movie["backdrop_path"] as? String
-           
-            let backDropURL = URL(string: baseURLString + backDropPathString!)!
-            backDropImageView.af_setImage(withURL: backDropURL)
-            
-            let posterURL = URL(string: baseURLString + posterPathString!)!
-            let placeholderImage = UIImage(named: "placeholder")!
-            let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
-                size: posterImageView.frame.size,
-                radius: 20.0
-            )
-            posterImageView.af_setImage(withURL: posterURL, placeholderImage: placeholderImage, filter: filter, imageTransition: .crossDissolve(0.2))
-            
-        }
+        titleLabelView.text = movie.title
+        releaseDateLabelView.text = movie.releaseDate
+        overViewLabelView.text = movie.overview
+        let backDropURL = movie.backDropURL
+        backDropImageView.af_setImage(withURL: backDropURL!)
+        
+        let posterURL = movie.posterURL
+        let placeholderImage = UIImage(named: "placeholder")!
+        let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
+                            size: posterImageView.frame.size,
+                            radius: 20.0
+                        )
+        posterImageView.af_setImage(withURL: posterURL!, placeholderImage: placeholderImage, filter: filter, imageTransition: .crossDissolve(0.2))
+        
+//        if let movie = movie {
+//            titleLabelView.text = movie["title"] as? String
+//            releaseDateLabelView.text = movie["release_date"] as? String
+//            overViewLabelView.text = movie["overview"] as? String
+//
+//            let baseURLString = "https://image.tmdb.org/t/p/w500"
+//            let posterPathString = movie["poster_path"] as? String
+//            let backDropPathString = movie["backdrop_path"] as? String
+//
+//            let backDropURL = URL(string: baseURLString + backDropPathString!)!
+//            backDropImageView.af_setImage(withURL: backDropURL)
+//
+//            let posterURL = URL(string: baseURLString + posterPathString!)!
+//            let placeholderImage = UIImage(named: "placeholder")!
+//            let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
+//                size: posterImageView.frame.size,
+//                radius: 20.0
+//            )
+//            posterImageView.af_setImage(withURL: posterURL, placeholderImage: placeholderImage, filter: filter, imageTransition: .crossDissolve(0.2))
+//
+ //       }
 
     }
 

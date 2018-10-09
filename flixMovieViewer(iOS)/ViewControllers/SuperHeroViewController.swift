@@ -7,19 +7,19 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class SuperHeroViewController: UIViewController, UICollectionViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
-    var movies: [[String: Any]] = []
+    var movies: [Movie] = []
+    var allMovies: [Movie] = []
     var refreshControl: UIRefreshControl!
-    var allMovies: [[String: Any]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
-        
         searchBar.delegate = self
         
         refreshControl = UIRefreshControl()
@@ -49,64 +49,36 @@ class SuperHeroViewController: UIViewController, UICollectionViewDataSource, UIS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PosterCell", for: indexPath) as! PosterCell
-        let movie = movies[indexPath.item]
-        if let posterPathString = movie["poster_path"] as? String {
-            let baseURLString = "https://image.tmdb.org/t/p/w500"
-            let posterURL = URL(string: baseURLString + posterPathString)!
-            
-            cell.posterImageView.af_setImage(withURL: posterURL)
-            
-        }
+        cell.movies = movies[indexPath.item]
         return cell
     }
     
     func fetchMovies() {
-        //Network Request
-        let url = URL(string: "https://api.themoviedb.org/3/movie/363088/similar?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-        let task = session.dataTask(with: request) { (data, response, error) in
-            //This will run when the network request returns
-            if let error = error {
-                print(error.localizedDescription)
-                //self.activityIndicator.stopAnimating()
-                //self.refreshControl.endRefreshing()
-                let alertController = UIAlertController(title: "Cannot get Movies", message: "There seems to be an issue with the internet connection", preferredStyle: .alert)
-                let cancelAction = UIAlertAction(title: "Dismiss", style: .cancel) { (action) in
-                }
-                alertController.addAction(cancelAction)
-                self.present(alertController, animated: true) {
-                }
-            } else if let data = data {
-                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                //Get the array of movies
-                let movies = dataDictionary["results"] as! [[String: Any]]
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        MovieApiManager().superHeroMovies { (movies: [Movie]?, error: Error?) in
+            if let movies = movies {
                 self.movies = movies
-                self.allMovies = movies
-                
+                self.allMovies = self.movies
                 self.collectionView.reloadData()
-                
-                //self.activityIndicator.stopAnimating()
                 self.refreshControl.endRefreshing()
+                MBProgressHUD.hide(for: self.view, animated: true)
+            } else {
+                print(error!.localizedDescription)
+                MBProgressHUD.hide(for: self.view, animated: true)
             }
         }
-        task.resume()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cell = sender as! UICollectionViewCell
         let indexPath = collectionView.indexPath(for: cell)
-        let movie = movies[(indexPath?.item)!]
         let detailViewControler = segue.destination as! DetailViewController
-        detailViewControler.movie = movie
-        //let superHeroDetailViewController = segue.destination as! SuperHeroDetailViewController
-        //superHeroDetailViewController.movie = movie
+        detailViewControler.movie = movies[(indexPath?.item)!]
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        movies = searchText.isEmpty ? movies : allMovies.filter { (item: [String: Any]) -> Bool in
-            
-            let i = item["title"] as! String
+        movies = searchText.isEmpty ? allMovies : allMovies.filter { (item: Movie) -> Bool in
+            let i = item.title
             return i.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
         }
         

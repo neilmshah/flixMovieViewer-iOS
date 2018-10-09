@@ -11,7 +11,9 @@
 		280D74052147001D0086791C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280D74042147001D0086791C /* DetailViewController.swift */; };
 		280D740721471DAF0086791C /* PosterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280D740621471DAF0086791C /* PosterCell.swift */; };
 		280D740921471E3B0086791C /* SuperHeroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 280D740821471E3B0086791C /* SuperHeroViewController.swift */; };
+		2859CEF8216D328F004D7629 /* flixClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2859CEF7216D328F004D7629 /* flixClient.swift */; };
 		285DEC872142FD7800CFCF8B /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 285DEC862142FD7800CFCF8B /* MovieCell.swift */; };
+		28956D4C21682676001EDA05 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28956D4B21682676001EDA05 /* Movie.swift */; };
 		28DA546A2142DD580040022D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28DA54692142DD580040022D /* AppDelegate.swift */; };
 		28DA546F2142DD590040022D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 28DA546D2142DD590040022D /* Main.storyboard */; };
 		28DA54712142DD5A0040022D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 28DA54702142DD5A0040022D /* Assets.xcassets */; };
@@ -23,7 +25,9 @@
 		280D74042147001D0086791C /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		280D740621471DAF0086791C /* PosterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PosterCell.swift; sourceTree = "<group>"; };
 		280D740821471E3B0086791C /* SuperHeroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperHeroViewController.swift; sourceTree = "<group>"; };
+		2859CEF7216D328F004D7629 /* flixClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = flixClient.swift; sourceTree = "<group>"; };
 		285DEC862142FD7800CFCF8B /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		28956D4B21682676001EDA05 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		28DA54662142DD580040022D /* flixMovieViewer(iOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "flixMovieViewer(iOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		28DA54692142DD580040022D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28DA546E2142DD590040022D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -76,6 +80,22 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		2859CEF6216D3276004D7629 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				2859CEF7216D328F004D7629 /* flixClient.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		28956D4821682641001EDA05 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				28956D4B21682676001EDA05 /* Movie.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		28DA545D2142DD580040022D = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +117,8 @@
 		28DA54682142DD580040022D /* flixMovieViewer(iOS) */ = {
 			isa = PBXGroup;
 			children = (
+				2859CEF6216D3276004D7629 /* API */,
+				28956D4821682641001EDA05 /* Models */,
 				280D74032146FFD50086791C /* Views */,
 				280D74022146FFBC0086791C /* ViewControllers */,
 				28DA54692142DD580040022D /* AppDelegate.swift */,
@@ -212,11 +234,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-flixMovieViewer(iOS)/Pods-flixMovieViewer(iOS)-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -230,10 +254,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28956D4C21682676001EDA05 /* Movie.swift in Sources */,
 				280D740921471E3B0086791C /* SuperHeroViewController.swift in Sources */,
 				28DA546A2142DD580040022D /* AppDelegate.swift in Sources */,
 				280D740721471DAF0086791C /* PosterCell.swift in Sources */,
 				28DA547C2142DED90040022D /* MovieViewController.swift in Sources */,
+				2859CEF8216D328F004D7629 /* flixClient.swift in Sources */,
 				285DEC872142FD7800CFCF8B /* MovieCell.swift in Sources */,
 				280D74052147001D0086791C /* DetailViewController.swift in Sources */,
 			);

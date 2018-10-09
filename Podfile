@@ -7,5 +7,6 @@ target 'flixMovieViewer(iOS)' do
 
   # Pods for flixMovieViewer(iOS)
 	pod 'AlamofireImage', '~> 3.3'
+	pod 'MBProgressHUD'
 
 end
