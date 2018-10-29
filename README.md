@@ -20,16 +20,6 @@ The following **stretch** user stories are implemented:
 - [x] While poster is being fetched, user see's a placeholder image (+1pt)
 - [x] User sees image transition for images coming from network, not when it is loaded from cache (+1pt)
 - [x] Customize the selection effect of the cell (+1pt)
-- [ ] For the large poster, load the low resolution image first and then switch to the high resolution image when complete (+2pt)
-
-The following **additional** user stories are implemented:
-
-- [ ] List anything else that you can get done to improve the app functionality! (+1-3pts)
-
-Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
-
-1.
-2.
 
 ## Video Walkthrough
 
@@ -39,13 +29,10 @@ Here's a walkthrough of implemented user stories:
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
-## Notes
-
-Describe any challenges encountered while building the app.
 
 ## License
 
-Copyright [Neil Shah]
+Copyright [2018][Neil Shah]
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -76,23 +63,9 @@ The following **required** functionality is completed:
 The following **stretch** features are implemented:
 
 - [x] User can tap a poster in the collection view to see a detail screen of that movie (+3pts)
-- [ ] In the detail view, when the user taps the poster, a new screen is presented modally where they can view the trailer (+3pts)
 - [x] Customize the navigation bar (+1pt)
-- [ ] List in any optionals you didn't finish from last week (+1-3pts)
-- ...
-- ...
-
-The following **additional** features are implemented:
-
-- [x] List anything else that you can get done to improve the app functionality!
-- Added pullToRefresh on SuperHero view
-- Added Search Bar to SuperHero View
-
-
-Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
-
-1.
-2.
+- [x] Added pullToRefresh on SuperHero view
+- [x] Added Search Bar to SuperHero View
 
 ## Video Walkthrough
 
@@ -102,13 +75,9 @@ Here's a walkthrough of implemented user stories:
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
-## Notes
-
-Describe any challenges encountered while building the app.
-
 ## License
 
-Copyright [Neil Shah]
+Copyright [2018][Neil Shah]
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -141,15 +110,6 @@ The following **stretch** user stories are implemented:
 - [x] Dynamic Height Cells (+1)
 - [x] Collection View AutoLayout (+2)
 
-The following **additional** user stories are implemented:
-
-- [ ] List anything else that you can get done to improve the app functionality! (+1-3pts)
-
-Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
-
-1.
-2.
-
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
@@ -158,13 +118,10 @@ Here's a walkthrough of implemented user stories:
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
-## Notes
-
-Describe any challenges encountered while building the app.
 
 ## License
 
-Copyright [Neil Shah]
+Copyright [2018][Neil Shah]
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -193,15 +150,6 @@ The following **required** user stories are complete:
 - [x] Implement property observers (+2pt)
 - [x] Create a basic API Client (+2pt)
 
-The following **additional** user stories are implemented:
-
-- [ ] List anything else that you can get done to improve the app functionality! (+1-3pts)
-
-Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
-
-1.
-2.
-
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
@@ -210,9 +158,6 @@ Here's a walkthrough of implemented user stories:
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
-## Notes
-
-Describe any challenges encountered while building the app.
 
 ## License
 
